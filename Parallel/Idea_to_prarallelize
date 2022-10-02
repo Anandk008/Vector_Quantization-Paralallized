@@ -1,0 +1,39 @@
+Name : Anand Nandkumar Kadale
+PRN : 21620003
+Subject : Computer Algorithm  
+
+Assignment 
+ 
+Q ) Idea to parallelize the Vector quantization code ?
+Ans : the parallelization can be implement in the code at two places : 
+At the input stage.
+At the processing stage or at the codebook making stage.
+
+Talking about parallelization stage we can implement at the image reading stage to read the image , as we are reading and making blocks or groups of 4x4 pixels by this we can speedify this process, the concept is below to parallelize it  :
+The first or rank 0 processor will keep track of every processor and check the work is done.
+The remaining processors will be have to work for a given range and this range will be specified according to their processor no. with a formula as below :
+Range = lower bound - upper bound
+
+Lower bound =  (rank - 1 )  /  size
+Upper bound = rank / size 
+			For example, if processor rank is  1 and size of processors is 10, then
+
+					Lower bound = (rank-1) / size
+						          = ( 1 - 1 ) / 10
+						          = 0 / 10 = 0
+					Upper bound = rank / size
+							= 1/ 10
+							= 0.1
+			Therefore, the processor with rank 1 has to do work in range ( 0 - 0.1 ) and for processor rank 2 range is ( 0.1 - 0.2 ) and accordingly for remaining processors.
+
+
+Now after the input stage we will do a quick search of similar vectors and make  a simple code book that we will be refining now. For this refining we also take much time so this should be parallelized to get work done quickly and for this we also have to apply the above discussed method.
+
+
+But, as you can see that this method is very complex , so this will require some high level of brainstroming that's why i was not able to implemented this method but i had implemented  this code to work with 2 processors.
+
+
+Data compression ratio is defined as the ratio between the uncompressed size and compressed size: Thus, a representation that compresses a file's storage size from 10 MB to 2 MB has a compression ratio of 10/2 = 5, often notated as an explicit ratio, 5:1 (read "five" to "one"), or as 
+an implicit ratio, 5/1. Huffman encoding takes this idea to the extreme. Characters that occur most often, such the space and period, may be assigned as few as one or two bits.
+The Observation was it takes more time to compress an image in Vector quantization while in Huffman coding does compression faster
+
